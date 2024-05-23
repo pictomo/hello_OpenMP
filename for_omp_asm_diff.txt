@@ -1,0 +1,194 @@
+13c13
+< 	stp	x29, x30, [sp, -80]!
+---
+> 	stp	x29, x30, [sp, -64]!
+23,24c23,24
+< 	str	w8, [x29, 72]
+< 	ldr	w8, [x29, 72]
+---
+> 	str	w8, [x29, 52]
+> 	ldr	w8, [x29, 52]
+27c27
+< 	str	x9, [x29, 64]
+---
+> 	str	x9, [x29, 40]
+52,64c52,53
+< 	str	x0, [x29, 56]
+< 	ldr	x0, [x29, 56]
+< 	str	x0, [x29, 40]
+< 	ldr	w0, [x29, 72]
+< 	str	w0, [x29, 48]
+< 	add	x0, x29, 40
+< 	mov	w3, 0
+< 	mov	w2, 0
+< 	mov	x1, x0
+< 	adrp	x0, _main._omp_fn.0@PAGE
+< 	add	x0, x0, _main._omp_fn.0@PAGEOFF;
+< 	bl	_GOMP_parallel
+< 	str	wzr, [x29, 76]
+---
+> 	str	x0, [x29, 32]
+> 	str	wzr, [x29, 60]
+67,68c56,73
+< 	ldr	x0, [x29, 56]
+< 	ldrsw	x1, [x29, 76]
+---
+> 	ldr	w0, [x29, 60]
+> 	lsl	w2, w0, 1
+> 	ldr	x0, [x29, 32]
+> 	ldrsw	x1, [x29, 60]
+> 	str	w2, [x0, x1, lsl 2]
+> 	ldr	w0, [x29, 60]
+> 	add	w0, w0, 1
+> 	str	w0, [x29, 60]
+> L2:
+> 	ldr	w1, [x29, 60]
+> 	ldr	w0, [x29, 52]
+> 	cmp	w1, w0
+> 	blt	L3
+> 	str	wzr, [x29, 56]
+> 	b	L4
+> L5:
+> 	ldr	x0, [x29, 32]
+> 	ldrsw	x1, [x29, 56]
+74c79
+< 	ldr	w0, [x29, 76]
+---
+> 	ldr	w0, [x29, 56]
+76,79c81,84
+< 	str	w0, [x29, 76]
+< L2:
+< 	ldr	w1, [x29, 76]
+< 	ldr	w0, [x29, 72]
+---
+> 	str	w0, [x29, 56]
+> L4:
+> 	ldr	w1, [x29, 56]
+> 	ldr	w0, [x29, 52]
+81c86
+< 	blt	L3
+---
+> 	blt	L5
+86c91
+< 	ldp	x29, x30, [sp], 80
+---
+> 	ldp	x29, x30, [sp], 64
+90,148d94
+< 	.align	2
+< _main._omp_fn.0:
+< LFB2:
+< 	stp	x29, x30, [sp, -80]!
+< LCFI4:
+< 	mov	x29, sp
+< LCFI5:
+< 	stp	x19, x20, [sp, 16]
+< LCFI6:
+< 	str	x0, [x29, 40]
+< 	ldr	x0, [x29, 40]
+< 	ldr	x0, [x0]
+< 	str	x0, [x29, 64]
+< 	ldr	x0, [x29, 40]
+< 	ldr	w0, [x0, 8]
+< 	str	w0, [x29, 60]
+< 	ldr	w19, [x29, 60]
+< 	bl	_omp_get_num_threads
+< 	mov	w20, w0
+< 	bl	_omp_get_thread_num
+< 	mov	w2, w0
+< 	sdiv	w0, w19, w20
+< 	sdiv	w1, w19, w20
+< 	mul	w1, w1, w20
+< 	sub	w1, w19, w1
+< 	cmp	w2, w1
+< 	blt	L6
+< L9:
+< 	mul	w2, w0, w2
+< 	add	w1, w2, w1
+< 	add	w0, w1, w0
+< 	cmp	w1, w0
+< 	bge	L7
+< 	str	w1, [x29, 76]
+< L8:
+< 	ldr	w1, [x29, 76]
+< 	lsl	w3, w1, 1
+< 	ldr	x1, [x29, 64]
+< 	ldrsw	x2, [x29, 76]
+< 	str	w3, [x1, x2, lsl 2]
+< 	ldr	w1, [x29, 76]
+< 	add	w1, w1, 1
+< 	str	w1, [x29, 76]
+< 	ldr	w1, [x29, 76]
+< 	cmp	w1, w0
+< 	blt	L8
+< L7:
+< 	bl	_GOMP_barrier
+< 	b	L10
+< L6:
+< 	mov	w1, 0
+< 	add	w0, w0, 1
+< 	b	L9
+< L10:
+< 	ldp	x19, x20, [sp, 16]
+< 	ldp	x29, x30, [sp], 80
+< LCFI7:
+< 	ret
+< LFE2:
+180c126
+< 	.uleb128 0x50
+---
+> 	.uleb128 0x40
+182c128
+< 	.uleb128 0xa
+---
+> 	.uleb128 0x8
+184c130
+< 	.uleb128 0x9
+---
+> 	.uleb128 0x7
+194c140
+< 	.uleb128 0x8
+---
+> 	.uleb128 0x6
+206,247d151
+< LSFDE3:
+< 	.set L$set$7,LEFDE3-LASFDE3
+< 	.long L$set$7
+< LASFDE3:
+< 	.long	LASFDE3-EH_frame1
+< 	.quad	LFB2-.
+< 	.set L$set$8,LFE2-LFB2
+< 	.quad L$set$8
+< 	.uleb128 0
+< 	.byte	0x4
+< 	.set L$set$9,LCFI4-LFB2
+< 	.long L$set$9
+< 	.byte	0xe
+< 	.uleb128 0x50
+< 	.byte	0x9d
+< 	.uleb128 0xa
+< 	.byte	0x9e
+< 	.uleb128 0x9
+< 	.byte	0x4
+< 	.set L$set$10,LCFI5-LCFI4
+< 	.long L$set$10
+< 	.byte	0xd
+< 	.uleb128 0x1d
+< 	.byte	0x4
+< 	.set L$set$11,LCFI6-LCFI5
+< 	.long L$set$11
+< 	.byte	0x93
+< 	.uleb128 0x8
+< 	.byte	0x94
+< 	.uleb128 0x7
+< 	.byte	0x4
+< 	.set L$set$12,LCFI7-LCFI6
+< 	.long L$set$12
+< 	.byte	0xde
+< 	.byte	0xdd
+< 	.byte	0xd3
+< 	.byte	0xd4
+< 	.byte	0xc
+< 	.uleb128 0x1f
+< 	.uleb128 0
+< 	.align	3
+< LEFDE3:
