@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <math.h>
-// #include <omp.h>
+#include <omp.h>
 
 int main()
 {
-	printf("Processing started.\n");
 
 	double result = 0;
 
@@ -28,8 +27,6 @@ int main()
 	}
 
 	printf("result: %f\n", result);
-
-	printf("Processing completed.\n");
 
 	return 0;
 }
