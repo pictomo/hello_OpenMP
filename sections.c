@@ -3,6 +3,9 @@
 
 int main()
 {
+
+	// #pragma omp parallel sections
+
 #pragma omp parallel
 	{
 #pragma omp sections
@@ -32,7 +35,8 @@ int main()
 				int thread_num = omp_get_thread_num();
 				printf("section 5 : thread %d\n", thread_num);
 			}
-		}
+		} // 暗黙的なバリア
 	}
+
 	return 0;
 }
